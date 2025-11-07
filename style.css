@@ -1,0 +1,494 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+}
+
+.title {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+}
+
+#gameContainer {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+}
+
+/* Background */
+.background {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, #87ceeb 0%, #b0e0e6 50%, #e0f6ff 100%);
+}
+
+/* Clouds */
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: pulse 3s infinite;
+}
+
+.cloud1 {
+    width: 96px;
+    height: 48px;
+    top: 40px;
+    left: 10%;
+}
+
+.cloud2 {
+    width: 128px;
+    height: 64px;
+    top: 128px;
+    right: 15%;
+    opacity: 0.6;
+    animation-duration: 4s;
+    animation-delay: 1s;
+}
+
+.cloud3 {
+    width: 80px;
+    height: 40px;
+    top: 96px;
+    left: 40%;
+    opacity: 0.5;
+    animation-duration: 3.5s;
+    animation-delay: 0.5s;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.05); }
+}
+
+/* Sun */
+.sun {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 64px;
+    height: 64px;
+    background: #fde047;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(253, 224, 71, 0.6);
+    animation: pulse 2s infinite;
+}
+
+.sun-glow {
+    position: absolute;
+    inset: 0;
+    background: #facc15;
+    border-radius: 50%;
+    filter: blur(12px);
+    opacity: 0.6;
+}
+
+/* Ground */
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 96px;
+    background: linear-gradient(to top, #15803d, #16a34a, #22c55e);
+}
+
+.ground-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.3;
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 15px,
+        rgba(0,0,0,0.2) 15px,
+        rgba(0,0,0,0.2) 30px
+    );
+}
+
+.ground-top {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 8px;
+    background: #166534;
+    opacity: 0.5;
+}
+
+/* Pipes */
+.pipe {
+    position: absolute;
+    width: 80px;
+    background: linear-gradient(to right, #22c55e, #16a34a);
+    box-shadow: inset -3px 0 8px rgba(0,0,0,0.3), 4px 0 10px rgba(0,0,0,0.4);
+}
+
+.pipe-top {
+    border-radius: 0 0 8px 8px;
+}
+
+.pipe-bottom {
+    border-radius: 8px 8px 0 0;
+}
+
+.pipe-cap {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92px;
+    height: 32px;
+    background: #15803d;
+}
+
+.pipe-cap-top {
+    bottom: 0;
+    border-radius: 0 0 12px 12px;
+}
+
+.pipe-cap-bottom {
+    top: 0;
+    border-radius: 12px 12px 0 0;
+}
+
+/* Bird */
+#bird {
+    position: absolute;
+    left: 100px;
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+    transition: transform 0.1s;
+}
+
+.bird-body {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #fde047, #fbbf24, #f97316);
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.bird-body-inner {
+    position: absolute;
+    inset: 4px;
+    background: linear-gradient(135deg, #fef08a, #fbbf24);
+    border-radius: 50%;
+}
+
+.bird-wing {
+    position: absolute;
+    top: 8px;
+    left: 4px;
+    width: 28px;
+    height: 20px;
+    background: linear-gradient(135deg, #fdba74, #f97316);
+    border-radius: 50%;
+}
+
+.bird-wing.flap {
+    animation: flap 0.3s infinite;
+}
+
+@keyframes flap {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(-10deg); }
+}
+
+.bird-eye {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.bird-pupil {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 10px;
+    height: 10px;
+    background: black;
+    border-radius: 50%;
+}
+
+.bird-shine {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+}
+
+.bird-beak {
+    position: absolute;
+    top: 20px;
+    right: -4px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-left: 16px solid #ea580c;
+    border-bottom: 8px solid transparent;
+}
+
+.bird-feather {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 12px;
+    height: 12px;
+    background: #ea580c;
+    border-radius: 50%;
+    opacity: 0.4;
+}
+
+/* Particles */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 8px currentColor;
+}
+
+/* Score */
+#score {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 4px 4px 0 rgba(0,0,0,0.3), 6px 6px 10px rgba(0,0,0,0.5);
+    -webkit-text-stroke: 2px rgba(0,0,0,0.2);
+}
+
+/* Sound Toggle */
+#soundToggle {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 20;
+    background: rgba(255,255,255,0.8);
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+
+#soundToggle:hover {
+    background: rgba(255,255,255,1);
+    transform: scale(1.1);
+}
+
+/* Overlays */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 30;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+/* Start Screen */
+.start-content {
+    text-align: center;
+    animation: pulse 2s infinite;
+}
+
+.game-title {
+    font-size: 3.5rem;
+    color: white;
+    margin-bottom: 24px;
+    text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
+}
+
+.instructions {
+    background: rgba(255,255,255,0.9);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.instructions-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 16px;
+}
+
+.instructions p {
+    font-size: 1.125rem;
+    color: #374151;
+    margin: 8px 0;
+}
+
+.best-score {
+    font-size: 1.875rem;
+    color: #fde047;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.start-prompt {
+    font-size: 1.25rem;
+    color: white;
+    animation: bounce 1s infinite;
+    margin-top: 16px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Game Over Screen */
+.gameover-content {
+    background: linear-gradient(135deg, white, #f3f4f6);
+    border-radius: 24px;
+    padding: 32px;
+    max-width: 320px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: pulse 2s infinite;
+}
+
+.gameover-title {
+    font-size: 3rem;
+    color: #ef4444;
+    margin-bottom: 24px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.score-display {
+    background: #eff6ff;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.final-score {
+    font-size: 1.875rem;
+    margin-bottom: 12px;
+    color: #1f2937;
+}
+
+.final-score span {
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.best-score-gameover {
+    font-size: 1.5rem;
+    color: #1f2937;
+}
+
+.best-score-gameover span {
+    font-weight: bold;
+    color: #d97706;
+}
+
+#restartBtn {
+    background: linear-gradient(to right, #3b82f6, #9333ea);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 9999px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+
+#restartBtn:hover {
+    background: linear-gradient(to right, #2563eb, #7c3aed);
+    transform: scale(1.05);
+}
+
+.restart-hint {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-top: 16px;
+}
+
+/* Controls Info */
+.controls-info {
+    margin-top: 24px;
+    color: white;
+    background: rgba(0,0,0,0.3);
+    border-radius: 16px;
+    padding: 16px;
+    backdrop-filter: blur(4px);
+}
+
+.controls-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    #gameContainer {
+        width: 100%;
+        max-width: 400px;
+        height: 500px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .game-title {
+        font-size: 2.5rem;
+    }
+}

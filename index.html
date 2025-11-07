@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-info">
+            <h1 class="title">🐦 Flappy Bird</h1>
+        </div>
+        
+        <div id="gameContainer">
+            <!-- Background -->
+            <div class="background">
+                <!-- Clouds -->
+                <div class="cloud cloud1"></div>
+                <div class="cloud cloud2"></div>
+                <div class="cloud cloud3"></div>
+                
+                <!-- Sun -->
+                <div class="sun">
+                    <div class="sun-glow"></div>
+                </div>
+                
+                <!-- Ground -->
+                <div class="ground">
+                    <div class="ground-pattern"></div>
+                    <div class="ground-top"></div>
+                </div>
+            </div>
+
+            <!-- Game Elements -->
+            <div id="pipes"></div>
+            <div id="particles"></div>
+            
+            <!-- Bird -->
+            <div id="bird">
+                <div class="bird-body">
+                    <div class="bird-body-inner"></div>
+                </div>
+                <div class="bird-wing"></div>
+                <div class="bird-eye">
+                    <div class="bird-pupil">
+                        <div class="bird-shine"></div>
+                    </div>
+                </div>
+                <div class="bird-beak"></div>
+                <div class="bird-feather"></div>
+            </div>
+
+            <!-- Score -->
+            <div id="score">0</div>
+
+            <!-- Sound Toggle -->
+            <button id="soundToggle">🔊</button>
+
+            <!-- Start Screen -->
+            <div id="startScreen" class="overlay">
+                <div class="start-content">
+                    <h1 class="game-title">🐦 Flappy Bird</h1>
+                    <div class="instructions">
+                        <p class="instructions-title">How to Play:</p>
+                        <p>💻 <strong>PC:</strong> Press SPACE or ↑</p>
+                        <p>📱 <strong>Mobile:</strong> TAP screen</p>
+                        <p>🖱️ <strong>Mouse:</strong> CLICK anywhere</p>
+                    </div>
+                    <p class="best-score">Best Score: <span id="bestScoreDisplay">0</span></p>
+                    <p class="start-prompt">⬇️ Click, Tap or Press Space to Start! ⬇️</p>
+                </div>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" class="overlay hidden">
+                <div class="gameover-content">
+                    <h2 class="gameover-title">💥 Game Over!</h2>
+                    <div class="score-display">
+                        <p class="final-score">Score: <span id="finalScore">0</span></p>
+                        <p class="best-score-gameover">Best: <span id="bestScoreGameover">0</span></p>
+                    </div>
+                    <button id="restartBtn">🔄 Play Again</button>
+                    <p class="restart-hint">Press 'R' to restart</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Info -->
+        <div class="controls-info">
+            <p class="controls-title">🎮 Controls</p>
+            <div class="controls-grid">
+                <div>💻 PC: SPACE / ↑</div>
+                <div>📱 Mobile: TAP</div>
+                <div>🖱️ Mouse: CLICK</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
